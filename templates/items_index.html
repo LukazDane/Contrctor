@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+  {% for item in items %}
+  <div class="col-md-3 card">
+    <h2>
+      <a href="/items/{{ item._id }}">{{ item.title }}</a>
+    </h2>
+    <div class="card-body">
+      <p class="card-text">
+        {{ item.description }}
+      </p>
+      <small>
+        You rated <strong>{{ item.title }}</strong> :{{ item.ratings }}/5
+      </small>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
