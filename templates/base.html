@@ -3,9 +3,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>PokeMart</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
   </head>
   <body>
-    {% block content %} BODY CONTENT GOES HERE {% endblock %}
+    {% include 'partials/navbar.html' %}
+    <div class="container">
+      {% block content %} BODY CONTENT GOES HERE {% endblock %}
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>
 </html>

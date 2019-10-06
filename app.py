@@ -3,10 +3,10 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    """Return homepage."""
-    return render_template('home.html', msg='Flask is Cool!!')
+# @app.route('/')
+# def index():
+#     """Return homepage."""
+#     return render_template('home.html', msg='Flask is Cool!!')
 
 
 # mock items - delete later ₽
@@ -20,7 +20,7 @@ items = [
 ]
 
 
-@app.route('/items')
+@app.route('/')
 def items_index():
     """Display all itms"""
     return render_template("items_index.html", items=items)
