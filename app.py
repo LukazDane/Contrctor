@@ -31,5 +31,12 @@ def items_index():
     return render_template("items_index.html", items=items.find())
 
 
+@app.route('/items/new')
+def items_new():
+    """Add new Item
+    TODO: Lock this behind amin login after flask login set up """
+    return render_template('items_new.html', item={}, title="new item")
+
+
 if __name__ == '__main__':
     app.run(debug=True)
