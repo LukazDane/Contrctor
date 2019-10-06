@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <form method="POST" action="/items">
+      {% include 'partials/playlists_form.html' %}
+
+      <!-- BUTTON -->
+      <p>
+        <button type="submit" class="btn btn-primary">Save Playlist</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="window.location.href='/items'"
+        >
+          Cancel
+        </button>
+      </p>
+    </form>
+  </div>
+</div>
+{% endblock%}
