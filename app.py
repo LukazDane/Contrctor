@@ -60,5 +60,26 @@ def items_show(item_id):
     return render_template('items_show.html', item=item)
 
 
+@app.route('/items/<item_id>/edit')
+def items_edit(item_id):
+    item = item.find_one({'_id': ObjectId(item_id)})
+    return render_template('items_edit.html', item=item, title='Edit item')
+
+
+@app.route('/items/<item_id>', methods=['POST'])
+def items_update(item_id):
+    """Submit edited item"""
+    updated_item = {
+        'title': request.form.get('title'),
+        'description': request.form.get('description'),
+        'price': request.form.get('price'),
+        'ratings': request.form.get('ratings')
+    }
+    items.update_one(
+        {'_id': ObjectId(item_id)},
+        {'$set': updated_item})
+    return redirect(url_for(items_show, item_id=item_id))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
