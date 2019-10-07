@@ -1,0 +1,5 @@
+.col-md-3.card {
+  border: 1px solid black;
+  width: 33%;
+  display: inline-table;
+}
