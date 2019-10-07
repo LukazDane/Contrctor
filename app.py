@@ -2,29 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
-
-client = MongoClient()
-db = client.Pokemart
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Contractor')
+client = MongoClient(host=f'{host}?retryWrites=false')
+db = client.get_default_database()
 items = db.items
 
 app = Flask(__name__)
-
-
-# @app.route('/')
-# def index():
-#     """Return homepage."""
-#     return render_template('home.html', msg='Flask is Cool!!')
-
-
-# mock items - delete later ₽
-# items = [
-#     {'title': 'Pokeball',
-#         'description': 'A standard pokeball with a 50% success rate!', 'price': '200'},
-#     {'title': 'Great Ball',
-#         'description': 'An upgraded pokeball with a 65% success rate!', 'price': '400'},
-#     {'title': 'Ultra Ball',
-#         'description': 'The highest grade of pokeball with a 80% success rate!', 'price': '800'}
-# ]
 
 
 @app.route('/')
@@ -56,13 +39,14 @@ def items_new():
 @app.route('/items/<item_id>')
 def items_show(item_id):
     """Show an individual item."""
-    item = item.find_one({'_id': ObjectId(item_id)})
+    item = items.find_one({'_id': ObjectId(item_id)})
     return render_template('items_show.html', item=item)
 
 
 @app.route('/items/<item_id>/edit')
 def items_edit(item_id):
-    item = item.find_one({'_id': ObjectId(item_id)})
+    """Display edit form"""
+    item = items.find_one({'_id': ObjectId(item_id)})
     return render_template('items_edit.html', item=item, title='Edit item')
 
 
@@ -78,8 +62,15 @@ def items_update(item_id):
     items.update_one(
         {'_id': ObjectId(item_id)},
         {'$set': updated_item})
-    return redirect(url_for(items_show, item_id=item_id))
+    return redirect(url_for('items_show', item_id=item_id))
+
+
+@app.route('/items/<item_id>/delete', methods=['POST'])
+def items_delete(item_id):
+    """Delete single item."""
+    items.delete_one({'_id': ObjectId(item_id)})
+    return redirect(url_for('items_index'))
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))

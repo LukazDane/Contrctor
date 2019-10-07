@@ -1,4 +1,6 @@
 {% extends 'base.html' %} {% block content %}
+<h1>Browse our wares!</h1>
+
 <div class="row">
   {% for item in items %}
   <div class="col-md-3 card">
@@ -7,10 +9,12 @@
     </h2>
     <div class="card-body">
       <p class="card-text">
-        {{ item.description }}
+        {{ item.description }} <br />
+        <strong>{{ item.price }} ₽</strong>
       </p>
       <small>
-        You rated <strong>{{ item.title }}</strong> :{{ item.ratings }}/5
+        You rated <strong>{{ item.title }}</strong
+        >: {{ item.ratings }}/5
       </small>
     </div>
   </div>
