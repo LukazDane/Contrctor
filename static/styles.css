@@ -1,5 +1,13 @@
+/* shop page - items */
 .col-md-3.card {
   border: 1px solid black;
-  width: 33%;
+  width: 31%;
   display: inline-table;
+  margin: 1%;
+}
+
+img.card-img-top.item-image {
+  width: 100%;
+  text-align: center;
+  border: 1px solid;
 }
